@@ -49,6 +49,6 @@ RUN buildDeps=" \
 	&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps \
 	&& make clean
 
-COPY docker-php-ext-* /usr/local/bin/
+COPY root/docker-php-ext-* /usr/local/bin/
 
 ADD root /
