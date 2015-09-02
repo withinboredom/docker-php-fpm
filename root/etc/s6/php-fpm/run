@@ -5,4 +5,4 @@ then
  echo "Allowing for debug"
 fi
 
-exec php5-fpm -F
+exec php-fpm -F
