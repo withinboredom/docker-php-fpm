@@ -15,7 +15,6 @@ RUN apt-get update && apt-get install -y autoconf \
 		make \
 		pkg-config \
 		re2c \
-		libmcrypt-dev \
 		libbz2-dev \
 		--no-install-recommends && rm -r /var/lib/apt/lists/*
 ENV PHP_INI_DIR /etc/php5/fpm
@@ -31,7 +30,6 @@ RUN buildDeps=" \
 		librecode-dev \
 		libsqlite3-dev \
 		libssl-dev \
-		libmcrypt-dev \
 		libxml2-dev \
 		libbz2-dev \
 		xz-utils \
@@ -56,7 +54,6 @@ RUN buildDeps=" \
 		--with-recode \
 		--with-mysqli=mysqlnd \
 		--with-pdo-mysql=mysqlnd \
-		--with-mcrypt \
 		--with-zlib \
 	&& make -j"$(nproc)" \
 	&& make install \
