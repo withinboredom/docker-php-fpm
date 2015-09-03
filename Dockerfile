@@ -7,7 +7,17 @@ ENV ALLOW_DEBUG true
 
 # Install nginx and have it forward logs to Docker
 RUN apt-get update && apt-get install -y ca-certificates curl libpcre3 librecode0 libsqlite3-0 libxml2 --no-install-recommends && rm -r /var/lib/apt/lists/*
-RUN apt-get update && apt-get install -y autoconf file g++ gcc libc-dev make pkg-config re2c --no-install-recommends && rm -r /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y autoconf \
+		file \
+		g++ \
+		gcc \
+		libc-dev \
+		make \
+		pkg-config \
+		re2c \
+		libmcrypt-dev \
+		libbz2-dev \
+		--no-install-recommends && rm -r /var/lib/apt/lists/*
 ENV PHP_INI_DIR /etc/php5/fpm
 
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data
@@ -21,7 +31,9 @@ RUN buildDeps=" \
 		librecode-dev \
 		libsqlite3-dev \
 		libssl-dev \
+		libmcrypt-dev \
 		libxml2-dev \
+		libbz2-dev \
 		xz-utils \
 	" \
 	&& set -x \
@@ -42,6 +54,9 @@ RUN buildDeps=" \
 		--with-pcre \
 		--with-readline \
 		--with-recode \
+		--with-mysqli=mysqlnd \
+		--with-pdo-mysql=mysqlnd \
+		--with-mcrypt \
 		--with-zlib \
 	&& make -j"$(nproc)" \
 	&& make install \
